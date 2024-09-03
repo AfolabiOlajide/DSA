@@ -1,21 +1,21 @@
-function isAnagramTs(s: string, t: string): boolean {
+function isAnagram(s: string, t: string): boolean {
     if(s.length !== t.length) return false
-    const sMap: Record<string, number> = {}
+    const sMap: Map<string, number> = new Map()
 
     for(const char of s){
-        if(sMap[char] === undefined){
-            sMap[char] = 1
+        if(sMap.get(char) === undefined){
+            sMap.set(char, 1)
         }else{
-            sMap[char] += 1
+            sMap.set(char, sMap.get(char)! + 1)
         }
     }
 
     for(const char of t){
-        if(sMap[char] === undefined || sMap[char] <= 0){
+
+        if(sMap.get(char) === undefined || sMap.get(char)! <= 0){
             return false
         }
-        sMap[char] -= 1
+        sMap.set(char, sMap.get(char)! - 1)
     }
-
     return true
 };

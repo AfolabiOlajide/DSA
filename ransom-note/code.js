@@ -4,20 +4,20 @@
  * @return {boolean}
  */
 var canConstruct = function(ransomNote, magazine) {
-    const magazineCount = {}
+    const magazineCount = new Map()
     for(const value of magazine){
-        if(magazineCount[value] === undefined){
-            magazineCount[value] = 1
+        if(magazineCount.get(value) === undefined){
+            magazineCount.set(value, 1)
         }else{
-            magazineCount[value] += 1
+            magazineCount.set(value, magazineCount.get(value) + 1)
         }
     }
 
     for(const value of ransomNote){
-        if(magazineCount[value] === undefined || magazineCount[value] <= 0){
+        if(magazineCount.get(value) === undefined || magazineCount.get(value) <= 0){
             return false
         }
-        magazineCount[value] -= 1
+        magazineCount.set(value, magazineCount.get(value) - 1)
     }
 
     return true

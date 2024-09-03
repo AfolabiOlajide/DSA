@@ -1,18 +1,18 @@
-function canConstruct(ransomNote: string, magazine: string): boolean {
-    let magazineMap: Record<string, number> = {}
-    for(const value of magazine){
-        if(magazineMap[value] === undefined){
-            magazineMap[value] = 1
+function canConstructTs(ransomNote: string, magazine: string): boolean {
+    let magazineMap: Map<string, number> = new Map()
+    for(const char of magazine){
+        if(magazineMap.get(char) === undefined){
+            magazineMap.set(char, 1)
         }else{
-            magazineMap[value] += 1
+            magazineMap.set(char, magazineMap.get(char)! + 1)
         }
     }
 
-    for (const value of ransomNote){
-        if(magazineMap[value] === 0 || magazineMap[value] === undefined){
+    for (const char of ransomNote){
+        if(magazineMap.get(char) === 0 || magazineMap.get(char) === undefined){
             return false
         }
-        magazineMap[value] -= 1
+        magazineMap.set(char, magazineMap.get(char)! - 1)
     }
     return true
 };
